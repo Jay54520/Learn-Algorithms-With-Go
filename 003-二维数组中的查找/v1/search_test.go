@@ -13,10 +13,10 @@ func TestSearch(t *testing.T)  {
 
 	t.Run("查找存在的数字", func(t *testing.T) {
 		got := Search(array, 5)
-		want := 5
+		want := true
 
 		if want != got {
-			t.Errorf("got %d want %d", got, want)
+			t.Errorf("got %v want %v", got, want)
 		}
 	})
 

@@ -1,5 +1,5 @@
 package main
 
-func Search()  {
+func Search(array [][]int, number int)  {
 	
 }

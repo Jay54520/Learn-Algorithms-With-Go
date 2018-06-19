@@ -1,21 +1,21 @@
 package main
 
 func Search(array [][]int, number int) (result bool) {
-	max_row_index := len(array) - 1
-	max_col_index := len(array[0]) - 1
+	maxRowIndex := len(array) - 1
+	maxColIndex := len(array[0]) - 1
 
-	row_index := 0
-	col_index := max_col_index
+	rowIndex := 0
+	colIndex := maxColIndex
 
-	for row_index <= max_row_index && col_index >= 0 {
-		topRightNumber := array[row_index][col_index]
+	for rowIndex <= maxRowIndex && colIndex >= 0 {
+		topRightNumber := array[rowIndex][colIndex]
 		if number == topRightNumber {
 			result = true
 			break
 		} else if number < topRightNumber {
-			col_index -= 1
+			colIndex -= 1
 		} else {
-			row_index += 1
+			rowIndex += 1
 		}
 	}
 	return

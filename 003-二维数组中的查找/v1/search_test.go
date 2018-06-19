@@ -12,8 +12,17 @@ func TestSearch(t *testing.T)  {
 	}
 
 	t.Run("查找存在的数字", func(t *testing.T) {
-		got := Search(array, 5)
+		got := Search(array, 7)
 		want := true
+
+		if want != got {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
+
+	t.Run("数字不存在", func(t *testing.T) {
+		got := Search(array, 5)
+		want := false
 
 		if want != got {
 			t.Errorf("got %v want %v", got, want)

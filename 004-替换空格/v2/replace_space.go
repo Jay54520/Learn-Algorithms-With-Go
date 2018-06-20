@@ -1,18 +1,15 @@
 package main
 
-import (
-	"unicode/utf8"
-	"strconv"
-)
-
 func ReplaceSpace(s string) (replaced string) {
-	for _, Rune := range s {
-		spaceRune, _ := utf8.DecodeRuneInString(" ")
-		if Rune == spaceRune {
-			Rune = spaceRune
+	replacedRune := []rune("")
+	repSlice := []rune("%20")
+	for _, runeValue := range s {
+		if string(runeValue) == " " {
+			replacedRune = append(replacedRune, repSlice...)
+		} else {
+			replacedRune = append(replacedRune, runeValue)
 		}
-
-		replaced = replaced + strconv.QuoteRune(Rune)
 	}
-	return replaced
+	replaced = string(replacedRune)
+	return
 }

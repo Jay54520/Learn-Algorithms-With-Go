@@ -8,6 +8,21 @@ func TestBinaryTree(t *testing.T)  {
 		nil,
 		"value",
 	}
+	left := Node{
+		nil,
+		nil,
+		"left",
+	}
+	right := Node{
+		nil,
+		nil,
+		"right",
+	}
+	root := Node{
+		&left,
+		&right,
+		"root",
+	}
 
 	t.Run("level node", func(t *testing.T) {
 		if level.left != nil {
@@ -18,6 +33,18 @@ func TestBinaryTree(t *testing.T)  {
 		}
 		if level.value != "value" {
 			t.Errorf("got %v want %v", level.value, "value")
+		}
+	})
+	
+	t.Run("three nodes binary tree", func(t *testing.T) {
+		if root.left != &left {
+			t.Errorf("got %v want %v", root.left, &left)
+		}
+		if root.right != &right {
+			t.Errorf("got %v want %v", root.right, &right)
+		}
+		if root.value != "root" {
+			t.Errorf("got %v want %v", root.value, "root")
 		}
 	})
 }

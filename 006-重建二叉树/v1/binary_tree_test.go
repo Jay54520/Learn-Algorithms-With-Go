@@ -6,22 +6,22 @@ func TestBinaryTree(t *testing.T)  {
 	level := Node{
 		nil,
 		nil,
-		"value",
+		0,
 	}
 	left := Node{
 		nil,
 		nil,
-		"left",
+		1,
 	}
 	right := Node{
 		nil,
 		nil,
-		"right",
+		2,
 	}
 	root := Node{
 		&left,
 		&right,
-		"root",
+		0,
 	}
 
 	t.Run("level node", func(t *testing.T) {
@@ -31,8 +31,8 @@ func TestBinaryTree(t *testing.T)  {
 		if level.right != nil {
 			t.Errorf("%v doesn't have right node", level)
 		}
-		if level.value != "value" {
-			t.Errorf("got %v want %v", level.value, "value")
+		if level.value != 0 {
+			t.Errorf("got %v want %v", level.value, 0)
 		}
 	})
 	
@@ -43,8 +43,8 @@ func TestBinaryTree(t *testing.T)  {
 		if root.right != &right {
 			t.Errorf("got %v want %v", root.right, &right)
 		}
-		if root.value != "root" {
-			t.Errorf("got %v want %v", root.value, "root")
+		if root.value != 0 {
+			t.Errorf("got %v want %v", root.value, 0)
 		}
 	})
 }

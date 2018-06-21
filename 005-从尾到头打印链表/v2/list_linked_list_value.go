@@ -1,17 +1,22 @@
 package main
 
-func ListLinkedListValue(node *Node) []int  {
+func ListLinkedListValue(node *Node) []int {
 	ascendingValueList := []int{}
-	descendingValueList := []int{}
+
 	for node.next != nil {
 		ascendingValueList = append(ascendingValueList, node.value)
 		node = node.next
 	}
 	ascendingValueList = append(ascendingValueList, node.value)
 
-	for i:= len(ascendingValueList) - 1; i >= 0; i -- {
-		descendingValueList = append(descendingValueList, ascendingValueList[i])
-	}
+	descendingValueList := reversed(ascendingValueList)
 
 	return descendingValueList
+}
+
+func reversed(list []int) (reversedList []int) {
+	for i := len(list) - 1; i >= 0; i -- {
+		reversedList = append(reversedList, list[i])
+	}
+	return
 }

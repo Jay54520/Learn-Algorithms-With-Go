@@ -1,6 +1,6 @@
 package main
 
 type Node struct {
-	value interface{}
+	value int
 	next *Node
 }

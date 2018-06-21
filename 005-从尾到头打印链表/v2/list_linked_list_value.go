@@ -1,7 +1,7 @@
 package main
 
 func ListLinkedListValue(node *Node) []int {
-	ascendingValueList := []int{}
+	var ascendingValueList []int
 
 	for node.next != nil {
 		ascendingValueList = append(ascendingValueList, node.value)

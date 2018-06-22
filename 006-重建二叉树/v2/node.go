@@ -1,11 +1,21 @@
 package main
 
 type Node struct {
-	left *Node
+	left  *Node
 	right *Node
 	value int
 }
 
-func (node *Node) PreOrderTraversal() []int {
-	return []int{node.value, node.left.value, node.right.value}
+func (node *Node) PreOrderTraversal(result []int) []int {
+	if node != nil {
+		result = append(result, node.value)
+	}
+	if node.left != nil {
+		result = node.left.PreOrderTraversal(result)
+	}
+	if node.right != nil {
+		result = node.right.PreOrderTraversal(result)
+	}
+
+	return result
 }

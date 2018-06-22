@@ -52,8 +52,19 @@ func TestBinaryTree(t *testing.T)  {
 	})
 
 	t.Run("pre order traversal", func(t *testing.T) {
-		got := root.PreOrderTraversal()
+		var got []int
+		got = root.PreOrderTraversal(got)
 		want := []int{0, 1, 2}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
+
+	t.Run("pre order traversal with one node", func(t *testing.T) {
+		var got []int
+		got = level.PreOrderTraversal(got)
+		want := []int{0}
 
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("got %v want %v", got, want)

@@ -6,6 +6,6 @@ type Node struct {
 	value int
 }
 
-func PreOrderTraversal(Node)  {
-
+func (node *Node) PreOrderTraversal() []int {
+	return []int{node.value, node.left.value, node.right.value}
 }

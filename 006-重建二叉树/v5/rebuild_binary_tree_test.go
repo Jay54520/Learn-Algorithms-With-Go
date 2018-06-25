@@ -32,13 +32,13 @@ func TestRebuildBinaryTree(t *testing.T) {
 }
 
 
-func TreeEqual(node1 *Node, node2 *Node) bool {
+func TreeEqual(node1 *Node, node2 *Node) (equality bool) {
 	var result1 []int
 	var result2 []int
 	result1 = node1.PreOrderTraversal(result1)
 	result2 = node2.PreOrderTraversal(result2)
-	if !reflect.DeepEqual(result1, result2) {
-		return false
+	if reflect.DeepEqual(result1, result2) {
+		equality = true
 	}
-	return true
+	return
 }

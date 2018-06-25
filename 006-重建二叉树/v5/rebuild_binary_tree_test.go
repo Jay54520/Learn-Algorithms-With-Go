@@ -37,7 +37,7 @@ func TreeEqual(node1 *Node, node2 *Node) bool {
 	var result2 []int
 	result1 = node1.PreOrderTraversal(result1)
 	result2 = node2.PreOrderTraversal(result2)
-	if reflect.DeepEqual(result1, result2) {
+	if !reflect.DeepEqual(result1, result2) {
 		return false
 	}
 	return true

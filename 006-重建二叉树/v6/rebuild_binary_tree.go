@@ -30,7 +30,7 @@ func rebuild(preOrderTraversalResult []int, preOrderStartIndex int, preOrderEndI
 		value: rootValue,
 	}
 
-	// 直接返回只有一个节点的树
+	// 递归终止条件：只有一个节点
 	if preOrderStartIndex == preOrderEndIndex {
 		return
 	}
@@ -40,6 +40,11 @@ func rebuild(preOrderTraversalResult []int, preOrderStartIndex int, preOrderEndI
 	leftPreOrderEndIndex := preOrderStartIndex + leftTreeNodeNum
 
 	if leftTreeNodeNum > 0 {
+		// 因为前序遍历结果是 [根节点, 左子树结果, 右子树结果]，所以
+		// preOrderTraversalResult[preOrderStartIndex+1: leftPreOrderEndIndex] 是左子树的前序遍历结果
+		// 因为中序遍历结果是 [左子树结果, 根节点, 右子树结果]，所以
+		// inOrderTraversalResult[inOrderStartIndex: rootIndexOfInOrderTraversalResult-1] 是左子树的中序遍历结果
+		// 下面右子树的同理
 		rootNode.left = rebuild(
 			preOrderTraversalResult,
 			preOrderStartIndex+1, // 排除当前 root 节点

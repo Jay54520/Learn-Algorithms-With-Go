@@ -64,6 +64,17 @@ func TestRebuildBinaryTree(t *testing.T) {
 		}
 
 	})
+
+	t.Run("no node", func(t *testing.T) {
+		preOrderTraversalResult := []int{}
+		inOrderTraversalResult := []int{}
+		got := RebuildBinaryTree(preOrderTraversalResult, inOrderTraversalResult)
+
+		if got != nil {
+			t.Errorf("got %v want %v", got, nil)
+		}
+
+	})
 }
 
 func TreeEqual(got *Node, want *Node) (equality bool) {

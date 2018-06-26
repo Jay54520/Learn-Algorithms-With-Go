@@ -1,6 +1,9 @@
 package main
 
 func RebuildBinaryTree(preOrderTraversalResult []int, inOrderTraversalResult []int) *Node {
+	if len(preOrderTraversalResult) == 0 {
+		return nil
+	}
 	return rebuild(
 		preOrderTraversalResult,
 		0,

@@ -19,4 +19,18 @@ func TestStackPush(t *testing.T) {
 		}
 	})
 
+	t.Run("pop", func(t *testing.T) {
+		stack := Stack{
+			[]int{1, 2},
+		}
+		var got []int
+		got = append(got, stack.Pop())
+		got = append(got, stack.Pop())
+		want := []int{2, 1}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
+
 }

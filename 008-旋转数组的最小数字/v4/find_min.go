@@ -14,8 +14,14 @@ func FindMin(array []int) int {
 func findMin(array []int, low, high int) int {
 	middle := (high + low) / 2
 
+	if middle + 1 == high {
+		// 最大值是最后一个，那么最小值是第一个
+		return array[0]
+	}
+
 	if array[middle] > array[middle+1] {
 		return array[middle+1]
+	} else {
+		return findMin(array, middle, high)
 	}
-	return 0
 }

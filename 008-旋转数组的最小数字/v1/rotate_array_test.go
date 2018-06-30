@@ -28,4 +28,16 @@ func TestRotateArray(t *testing.T) {
 			t.Errorf("got %v want %v", got, want)
 		}
 	})
+
+	t.Run("array's length smaller than k", func(t *testing.T) {
+		array := []int{1, 2, 3}
+
+		k := 4
+		got := RotateArray(array, k)
+		want := []int{3, 1, 2}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
 }

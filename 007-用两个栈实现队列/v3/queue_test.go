@@ -5,7 +5,6 @@ import (
 	"reflect"
 )
 
-
 func TestQueue(t *testing.T) {
 
 	t.Run("enqueue", func(t *testing.T) {
@@ -20,7 +19,7 @@ func TestQueue(t *testing.T) {
 		}
 	})
 
-	t.Run("enqueue", func(t *testing.T) {
+	t.Run("dequeue", func(t *testing.T) {
 		queue := Queue{[]int{1, 2}}
 
 		got := []int{
@@ -35,7 +34,6 @@ func TestQueue(t *testing.T) {
 
 }
 
-
 func TestStackQueue(t *testing.T) {
 
 	t.Run("enqueue", func(t *testing.T) {
@@ -44,6 +42,21 @@ func TestStackQueue(t *testing.T) {
 		stackQueue.enqueue(2)
 
 		got := stackQueue.DataStack.Data
+		want := []int{1, 2}
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
+
+	t.Run("dequeue", func(t *testing.T) {
+		stackQueue := StackQueue{
+			&Stack{[]int{1, 2}},
+			&Stack{},
+		}
+		got := []int{
+			stackQueue.dequeue(),
+			stackQueue.dequeue(),
+		}
 		want := []int{1, 2}
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("got %v want %v", got, want)

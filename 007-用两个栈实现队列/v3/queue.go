@@ -27,6 +27,7 @@ func (queue *Queue) dequeue() (result int) {
 
 type StackQueue struct {
 	DataStack *Stack
+	stack1 *Stack
 }
 
 func (stackQueue *StackQueue) enqueue(i int) {
@@ -34,4 +35,20 @@ func (stackQueue *StackQueue) enqueue(i int) {
 		stackQueue.DataStack = &Stack{}
 	}
 	stackQueue.DataStack.Push(i)
+}
+func (stackQueue *StackQueue) dequeue() (result int) {
+	i := stackQueue.DataStack.Pop()
+	for i != 0{
+		stackQueue.stack1.Push(i)
+		i = stackQueue.DataStack.Pop()
+	}
+	result = stackQueue.stack1.Pop()
+
+	i = stackQueue.stack1.Pop()
+	for i != 0{
+		stackQueue.DataStack.Push(i)
+		i = stackQueue.stack1.Pop()
+	}
+
+	return
 }

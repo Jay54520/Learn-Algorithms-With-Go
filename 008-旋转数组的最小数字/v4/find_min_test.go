@@ -22,4 +22,14 @@ func TestFindMin(t *testing.T) {
 			t.Errorf("got %d want %d", got, want)
 		}
 	})
+
+	t.Run("minimum not at first or middle + 1", func(t *testing.T) {
+		array := []int{5, 1, 2, 3, 4}
+		got := FindMin(array)
+		want := 1
+
+		if got != want {
+			t.Errorf("got %d want %d", got, want)
+		}
+	})
 }

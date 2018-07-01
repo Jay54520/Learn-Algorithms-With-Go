@@ -65,4 +65,14 @@ func TestStrConv(t *testing.T)  {
 		fmt.Printf("%d's binary string is %s \n", int1, strconv.FormatInt(int1, 2))
 		fmt.Printf("%s >> 1 is %s \n", strconv.FormatInt(int1, 2), strconv.FormatInt(int2, 2))
 	})
+
+	t.Run("位移越界", func(t *testing.T) {
+		flag := 1
+		times := 0
+		for flag != 0 {
+			flag <<= 1
+			times += 1
+		}
+		fmt.Printf("%d << 1 %d times is 0", flag, times)
+	})
 }

@@ -1,0 +1,21 @@
+package main
+
+import "testing"
+
+func TestFib(t *testing.T)  {
+	t.Run("base condition", func(t *testing.T) {
+		got := Fib(0)
+		want := 0
+
+		if got != want {
+			t.Errorf("got %d want %d", got, want)
+		}
+
+		got1 := Fib(1)
+		want1 := 1
+
+		if got1 != want1 {
+			t.Errorf("got %d want %d", got1, want1)
+		}
+	})
+}

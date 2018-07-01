@@ -31,7 +31,13 @@ func TestFib(t *testing.T) {
 
 func BenchmarkFib(b *testing.B) {
 	for i:=0; i < b.N; i++ {
-		Fib(10)
+		Fib(30)
+	}
+}
+
+func BenchmarkFib2(b *testing.B) {
+	for i:=0; i < b.N; i++ {
+		Fib2(30)
 	}
 }
 

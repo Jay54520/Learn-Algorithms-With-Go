@@ -27,4 +27,42 @@ func TestStrConv(t *testing.T)  {
 		integer, _ := strconv.ParseInt(binaryString, 2, 64)
 		fmt.Printf("binary string %s is integer %d \n", binaryString, integer)
 	})
+
+	t.Run("|", func(t *testing.T) {
+		var int1 int64 = 1
+		var int2 int64 = 2
+		fmt.Printf("%d's binary string is %s \n", int1, strconv.FormatInt(int1, 2))
+		fmt.Printf("%d's binary string is %s \n", int2, strconv.FormatInt(int2, 2))
+		fmt.Printf("%d | %d is %s \n", int1, int2, strconv.FormatInt(int1 | int2, 2))
+	})
+
+	t.Run("&", func(t *testing.T) {
+		var int1 int64 = 1
+		var int2 int64 = 2
+		fmt.Printf("%d's binary string is %s \n", int1, strconv.FormatInt(int1, 2))
+		fmt.Printf("%d's binary string is %s \n", int2, strconv.FormatInt(int2, 2))
+		fmt.Printf("%d & %d is %s \n", int1, int2, strconv.FormatInt(int1 & int2, 2))
+	})
+
+	t.Run("^", func(t *testing.T) {
+		var int1 int64 = 1
+		var int2 int64 = 2
+		fmt.Printf("%d's binary string is %s \n", int1, strconv.FormatInt(int1, 2))
+		fmt.Printf("%d's binary string is %s \n", int2, strconv.FormatInt(int2, 2))
+		fmt.Printf("%d ^ %d is %s \n", int1, int2, strconv.FormatInt(int1 ^ int2, 2))
+	})
+
+	t.Run("<< 1", func(t *testing.T) {
+		var int1 int64 = 4
+		int2 := int1 << 1
+		fmt.Printf("%d's binary string is %s \n", int1, strconv.FormatInt(int1, 2))
+		fmt.Printf("%s << 1 is %s \n", strconv.FormatInt(int1, 2), strconv.FormatInt(int2, 2))
+	})
+
+	t.Run(">> 1", func(t *testing.T) {
+		var int1 int64 = 4
+		int2 := int1 >> 1
+		fmt.Printf("%d's binary string is %s \n", int1, strconv.FormatInt(int1, 2))
+		fmt.Printf("%s >> 1 is %s \n", strconv.FormatInt(int1, 2), strconv.FormatInt(int2, 2))
+	})
 }

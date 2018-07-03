@@ -1,7 +1,5 @@
 package main
 
-import "sort"
-
 func EvenOddArray(numbers []int) (result []int) {
 	var evenNumbers []int
 	var oddNumbers []int
@@ -13,9 +11,6 @@ func EvenOddArray(numbers []int) (result []int) {
 			evenNumbers = append(evenNumbers, v)
 		}
 	}
-
-	sort.Ints(oddNumbers)
-	sort.Ints(evenNumbers)
 
 	result = append(evenNumbers, oddNumbers...)
 	return

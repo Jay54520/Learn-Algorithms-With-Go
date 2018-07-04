@@ -12,7 +12,7 @@ func ReverseLinkedList(head *Node) (result *Node) {
 	var prev *Node = nil
 	current := head
 
-	for current.next != nil {
+	for current != nil {
 		next := current.next
 
 		// 当前节点的下一个节点为前一个节点
@@ -20,10 +20,6 @@ func ReverseLinkedList(head *Node) (result *Node) {
 		prev = current
 		current = next
 	}
-
-	// current 是最后一个节点
-	current.next = prev
-
-	result = current
+	result = prev
 	return
 }

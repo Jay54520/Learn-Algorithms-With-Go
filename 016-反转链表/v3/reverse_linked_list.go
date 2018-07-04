@@ -5,10 +5,6 @@ package main
 // 然后再变换三指针
 // 之后处理特殊情况
 func ReverseLinkedList(head *Node) (result *Node) {
-	if head == nil {
-		return
-	}
-
 	var prev *Node = nil
 	current := head
 

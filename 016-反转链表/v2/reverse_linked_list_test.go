@@ -21,7 +21,8 @@ func TestReverseLinkedList(t *testing.T) {
 
 	t.Run("reverse 3 nodes linked list", func(t *testing.T) {
 		got := ReverseLinkedList(&firstNode)
-		want := []int{3, 2, 1}
+		want := make([]int, 4)
+		want = append(want, []int{3, 2, 1}...)
 
 		if reflect.DeepEqual(got, want) {
 			t.Errorf("got %v want %v", got, want)

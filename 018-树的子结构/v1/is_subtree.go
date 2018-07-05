@@ -11,8 +11,11 @@ func IsSubtree(subTree *Node, parentTree *Node) (result bool) {
 		return true
 	}
 
+	inTraversalResults := subTree.InOrderTraversal([]int{})
+	preTraversalResults := subTree.PreOrderTraversal([]int{})
+
 	if parentTree != nil {
-		if TreeIsEqual(parentTree, subTree) {
+		if equalSubtree(parentTree, preTraversalResults, inTraversalResults) {
 			return true
 		}
 	}
@@ -28,21 +31,21 @@ func IsSubtree(subTree *Node, parentTree *Node) (result bool) {
 	return
 }
 
-func TreeIsEqual(tree1 *Node, tree2 *Node) (result bool) {
+func equalSubtree(tree1 *Node, preTraversalResults, inTraversalResults []int) (equality bool) {
 	if !reflect.DeepEqual(
 		tree1.PreOrderTraversal([]int{}),
-		tree2.PreOrderTraversal([]int{}),
+		preTraversalResults,
 	) {
 		return
 	}
 
 	if !reflect.DeepEqual(
 		tree1.InOrderTraversal([]int{}),
-		tree2.InOrderTraversal([]int{}),
+		inTraversalResults,
 	) {
 		return
 	}
 
-	result = true
+	equality = true
 	return
 }

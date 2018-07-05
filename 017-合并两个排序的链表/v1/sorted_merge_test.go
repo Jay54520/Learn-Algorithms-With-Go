@@ -29,4 +29,11 @@ func TestSortedMerge(t *testing.T)  {
 		}
 	})
 
+	t.Run("two empty linked lists", func(t *testing.T) {
+		got := SortedMerge(nil, nil)
+
+		if got != nil {
+			t.Errorf("%v should be nil", got)
+		}
+	})
 }

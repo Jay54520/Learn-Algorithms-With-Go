@@ -48,41 +48,70 @@ func TestConstructBST(t *testing.T) {
 
 func TestGetSubTreeTraversal(t *testing.T)  {
 	t.Run("6 nodes", func(t *testing.T) {
-		leftGot, rightGot := GetSubTreeTraversal([]int{1, 7, 5, 50, 40, 10})
+		leftGot, rootGot, rightGot := GetSubTreeTraversal([]int{1, 7, 5, 50, 40, 10})
 		leftWant := []int{1, 7, 5}
 		rightWant := []int{50, 40}
+		rootWant := 10
 
 		if !reflect.DeepEqual(leftGot, leftWant) {
 			t.Errorf("got %v want %v", leftGot, leftWant)
 		}
 		if !reflect.DeepEqual(rightGot, rightWant) {
 			t.Errorf("got %v want %v", rightGot, rightWant)
+		}
+		if !reflect.DeepEqual(rootGot, rootWant) {
+			t.Errorf("got %v want %v", rootGot, rootWant)
 		}
 	})
 
 	t.Run("empty", func(t *testing.T) {
-		leftGot, rightGot := GetSubTreeTraversal([]int{})
+		leftGot, rootGot, rightGot := GetSubTreeTraversal([]int{})
 		var leftWant []int
 		var rightWant []int
+		var rootWant int
 
 		if !reflect.DeepEqual(leftGot, leftWant) {
 			t.Errorf("got %v want %v", leftGot, leftWant)
 		}
 		if !reflect.DeepEqual(rightGot, rightWant) {
 			t.Errorf("got %v want %v", rightGot, rightWant)
+		}
+		if !reflect.DeepEqual(rootGot, rootWant) {
+			t.Errorf("got %v want %v", rootGot, rootWant)
 		}
 	})
 
 	t.Run("left left bst", func(t *testing.T) {
-		leftGot, rightGot := GetSubTreeTraversal([]int{2, 1})
+		leftGot, rootGot, rightGot := GetSubTreeTraversal([]int{2, 1})
 		leftWant := []int{}
 		rightWant := []int{2}
+		rootWant := 1
 
 		if !reflect.DeepEqual(leftGot, leftWant) {
 			t.Errorf("got %v want %v", leftGot, leftWant)
 		}
 		if !reflect.DeepEqual(rightGot, rightWant) {
 			t.Errorf("got %v want %v", rightGot, rightWant)
+		}
+		if !reflect.DeepEqual(rootGot, rootWant) {
+			t.Errorf("got %v want %v", rootGot, rootWant)
+		}
+	})
+
+	t.Run("one node BST", func(t *testing.T) {
+		leftGot, rootGot, rightGot := GetSubTreeTraversal([]int{1})
+		var leftWant []int
+		var rightWant []int
+		rootWant := 1
+
+		if !reflect.DeepEqual(leftGot, leftWant) {
+			t.Errorf("got %v want %v", leftGot, leftWant)
+		}
+		if !reflect.DeepEqual(rightGot, rightWant) {
+			t.Errorf("got %v want %v", rightGot, rightWant)
+		}
+		if !reflect.DeepEqual(rootGot, rootWant) {
+			t.Errorf("got %v want %v", rootGot, rootWant)
 		}
 	})
 }

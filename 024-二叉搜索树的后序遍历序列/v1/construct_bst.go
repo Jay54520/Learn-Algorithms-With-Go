@@ -21,28 +21,31 @@ func ConstructBST(postOrderTraversal []int) (rootNode *Node) {
 		return
 	}
 
-	leftSubTreeTraversal, rightSubTreeTraversal := GetSubTreeTraversal(postOrderTraversal)
+	leftSubTreeTraversal, rootValue, rightSubTreeTraversal := GetSubTreeTraversal(postOrderTraversal)
 	leftSubTree := ConstructBST(leftSubTreeTraversal)
 	rightSubTree := ConstructBST(rightSubTreeTraversal)
 
 	rootNode = &Node{
 		leftSubTree,
 		rightSubTree,
-		postOrderTraversal[length-1],
+		rootValue,
 	}
 	return
 }
 
 // GetSubTreeTraversal 分别返回左右子树的 postOrderTraversal
 func GetSubTreeTraversal(postOrderTraversal []int) (leftSubTreeTraversal []int,
-	rightSubTreeTraversal []int) {
+	rootNodeValue int, rightSubTreeTraversal []int) {
 
 	originalLength := len(postOrderTraversal)
 	if originalLength == 0 {
 		return
+	} else if originalLength == 1 {
+		rootNodeValue = postOrderTraversal[0]
+		return
 	}
 
-	rootNodeValue := postOrderTraversal[originalLength-1]
+	rootNodeValue = postOrderTraversal[originalLength-1]
 
 	currentLength := originalLength - 1
 	// 剔除根节点，因为左右子树的 postOrderTraversal 不包含根节点

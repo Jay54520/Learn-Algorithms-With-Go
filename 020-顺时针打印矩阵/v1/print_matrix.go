@@ -41,11 +41,12 @@ func move(matrix [][]int, result *[]int, startRow int, endRow int, startColumn i
 		move(matrix, result, startRow, endRow, startColumn, endColumn, "left")
 
 	case "left":
-		// 将 endRow 这一行的所有元素从右到左添加到 result，endRow -= 1，然后向上
-		endRowValues := matrix[endRow]
 		if startColumn > endColumn {
 			return
 		}
+
+		// 将 endRow 这一行的所有元素从右到左添加到 result，endRow -= 1，然后向上
+		endRowValues := matrix[endRow]
 		for i := endColumn; i >= startColumn; i-- {
 			*result = append(*result, endRowValues[i])
 		}
@@ -56,6 +57,7 @@ func move(matrix [][]int, result *[]int, startRow int, endRow int, startColumn i
 		if startRow > endRow {
 			return
 		}
+
 		// 将 startColumn 这一列的所有元素从下到上添加到 result，startColumn += 1，然后向右
 		for i := endRow; i >= startRow; i-- {
 			row := matrix[i]

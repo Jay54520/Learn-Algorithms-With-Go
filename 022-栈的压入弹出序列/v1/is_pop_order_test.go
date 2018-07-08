@@ -22,4 +22,13 @@ func TestIsPopOrder(t *testing.T) {
 		}
 	})
 
+	t.Run("empty", func(t *testing.T) {
+		var pushOrder []int
+		var popOrder []int
+		got := IsPopOrder(pushOrder, popOrder)
+		if !got {
+			t.Errorf("%v should be true", got)
+		}
+	})
+
 }

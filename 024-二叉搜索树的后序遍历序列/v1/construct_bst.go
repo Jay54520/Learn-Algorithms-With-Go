@@ -12,13 +12,6 @@ func ConstructBST(postOrderTraversal []int) (rootNode *Node) {
 
 	if length == 0 {
 		return
-	} else if length == 1 {
-		rootNode = &Node{
-			nil,
-			nil,
-			postOrderTraversal[0],
-		}
-		return
 	}
 
 	leftSubTreeTraversal, rootValue, rightSubTreeTraversal := GetSubTreeTraversal(postOrderTraversal)

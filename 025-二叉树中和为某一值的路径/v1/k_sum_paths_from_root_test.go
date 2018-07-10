@@ -6,8 +6,13 @@ import (
 )
 
 func TestKSumPathsFromRoot(t *testing.T) {
-	left := &Node{
+	leftLeft := &Node{
 		nil,
+		nil,
+		1,
+	}
+	left := &Node{
+		leftLeft,
 		nil,
 		28,
 	}

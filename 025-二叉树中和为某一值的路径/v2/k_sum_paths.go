@@ -2,7 +2,6 @@ package main
 
 import (
 	"reflect"
-	"fmt"
 )
 
 var globalPaths [][]int
@@ -59,18 +58,20 @@ func search(k int, path []int, root *Node) {
 	if !hasSamePath {
 		sum := sumSlice(path)
 		if sum == k {
-			fmt.Printf("Current paths: %v \n", globalPaths)
 			globalPaths = append(globalPaths, path)
-			fmt.Printf("Current paths: %v \n", globalPaths)
 		}
 	}
 
 	if root == nil {
 		return
 	} else {
-		path = append(path, root.value)
-		search(k, path, root.left)
-		search(k, path, root.right)
+		// 创建 newPath，与 path 使用不同的数组
+		newPath := make([]int, len(path))
+		copy(newPath, path)
+
+		newPath = append(newPath, root.value)
+		search(k, newPath, root.left)
+		search(k, newPath, root.right)
 	}
 
 }

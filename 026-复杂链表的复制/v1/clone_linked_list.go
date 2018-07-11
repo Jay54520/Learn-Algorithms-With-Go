@@ -1,6 +1,11 @@
 package main
 
 // CopyLinkedList 题意见 https://www.geeksforgeeks.org/a-linked-list-with-next-and-arbit-pointer/
+// 时间复杂度：
+	// copyNextLinkedList: O(n)
+	// for oldCurrent != nil: n
+		// FindInNew(): n。所有 arbit 都是最后一个几点，所以要遍历 n 次找到 arbit
+	// 所以这里是 O(n^2)
 func CopyLinkedList(oldLinkedList *Node) (newLinkedList *Node) {
 
 	newLinkedList = copyNextLinkedList(oldLinkedList)
@@ -18,6 +23,7 @@ func CopyLinkedList(oldLinkedList *Node) (newLinkedList *Node) {
 }
 
 // copyNextLinkedList 拷贝 oldLinkedList 的 next 链到 newLinkedList
+// 复杂度：O(n) n 为 oldLinkedList 的节点个数
 func copyNextLinkedList(oldLinkedList *Node) (newLinkedList *Node) {
 
 	newLinkedList = &Node{

@@ -4,31 +4,40 @@ import (
 	"testing"
 )
 
-func TestCopyNextLinkedList(t *testing.T)  {
-	thirdNode := &Node{
-		3,
-		nil,
-		nil,
-	}
-	secondNode := &Node{
-		2,
-		thirdNode,
-		nil,
-	}
-	firstNode := &Node{
-		1,
-		secondNode,
-		nil,
-	}
+func TestCopyNextLinkedList(t *testing.T) {
+	t.Run("three nodes linked list", func(t *testing.T) {
+		thirdNode := &Node{
+			3,
+			nil,
+			nil,
+		}
+		secondNode := &Node{
+			2,
+			thirdNode,
+			nil,
+		}
+		firstNode := &Node{
+			1,
+			secondNode,
+			nil,
+		}
 
-	newNode := copyNextLinkedList(firstNode)
-	if !linkedListEqual(newNode, firstNode) {
-		t.Errorf("got %v want %v", newNode, firstNode)
-	}
+		newNode := copyNextLinkedList(firstNode)
+		if !linkedListEqual(newNode, firstNode) {
+			t.Errorf("got %v want %v", newNode, firstNode)
+		}
+	})
 
+	t.Run("empty linked list", func(t *testing.T) {
+		want := &Node{}
+		got := copyNextLinkedList(want)
+		if !linkedListEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
 }
 
-func TestCopyLinkedList(t *testing.T)  {
+func TestCopyLinkedList(t *testing.T) {
 	t.Run("5 nodes", func(t *testing.T) {
 		fifthNode := &Node{
 			5,
@@ -83,7 +92,6 @@ func TestCopyLinkedList(t *testing.T)  {
 
 	})
 }
-
 
 func linkedListEqual(node1 *Node, node2 *Node) bool {
 	for node1 != nil && node2 != nil {

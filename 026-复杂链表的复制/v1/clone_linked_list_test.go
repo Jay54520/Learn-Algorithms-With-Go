@@ -81,10 +81,8 @@ func TestCopyLinkedList(t *testing.T) {
 	})
 
 	t.Run("empty linked list", func(t *testing.T) {
-		var nilNode1 *Node
-		var nilNode2 *Node
-		got := CopyLinkedList(nilNode1)
-		want := nilNode2
+		want := &Node{}
+		got := CopyLinkedList(want)
 
 		if !linkedListEqual(got, want) {
 			t.Errorf("got %v want %v", got, want)

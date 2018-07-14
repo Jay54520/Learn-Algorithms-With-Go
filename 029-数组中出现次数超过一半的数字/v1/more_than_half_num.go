@@ -11,6 +11,10 @@ package main
 // 每次设置后，检验次数，如果大于等于数组长度的一半则返回这个数字。
 // 遍历完成数组后返回 0，因为如果代码执行到了遍历完成后，说明没有
 // 这样的数字
+//
+// 复杂度分析：
+// 时间复杂度：没有这个数字，需要遍历整个数组，所以为 O(n)
+// 空间复杂度：没有这个数字并且数字都是唯一的，字典的键的个数就为数组的元素个数，所以为 O(n)
 func MoreThanHalfNum(nums []int) (result int) {
 	countOfNum := make(map[int]int)
 	var count int

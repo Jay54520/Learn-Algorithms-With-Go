@@ -28,7 +28,7 @@ func MoreThanHalfNum(nums []int) (result int) {
 			count = 1
 		}
 
-		if count >= halfLength {
+		if count > halfLength {
 			return num
 		}
 

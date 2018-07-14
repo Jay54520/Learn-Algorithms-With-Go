@@ -1,10 +1,16 @@
 package main
 
-import "strings"
+import (
+	"strings"
+	"sort"
+)
 
 // Permutation 返回 s 的全排列
 func Permutation(s string) (result []string) {
 	permutation(strings.Split(s, ""), 0, len(s)-1, &result)
+	sort.SliceStable(result, func(i, j int) bool {
+		return result[i] < result[j]
+	})
 	return
 }
 

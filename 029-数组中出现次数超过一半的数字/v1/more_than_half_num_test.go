@@ -11,4 +11,13 @@ func TestMoreThanHalfNum(t *testing.T) {
 			t.Errorf("got %v want %v", got, want)
 		}
 	})
+
+	t.Run("don't have more than half num", func(t *testing.T) {
+		nums := []int{1, 2, 3, 4}
+		got := MoreThanHalfNum(nums)
+		want := 0
+		if got != want {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
 }

@@ -20,4 +20,13 @@ func TestMoreThanHalfNum(t *testing.T) {
 			t.Errorf("got %v want %v", got, want)
 		}
 	})
+
+	t.Run("empty list", func(t *testing.T) {
+		var nums []int
+		got := MoreThanHalfNum(nums)
+		want := 0
+		if got != want {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
 }

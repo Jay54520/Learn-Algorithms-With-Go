@@ -26,7 +26,7 @@ func permutation(stringSlice []string, startIndex, endIndex int, resultSlice *[]
 		for i := startIndex; i <= endIndex; i ++ {
 			// 依次将所有 [startIndex, endIndex] 与 startIndex 交换
 			stringSlice[startIndex], stringSlice[i] = stringSlice[i], stringSlice[startIndex]
-			// 剩余元素的全排列
+			// 当前全排列为第一个元素加上剩余元素的全排列，[startIndex+1, endIndex] 表示剩余元素
 			permutation(stringSlice, startIndex+1, endIndex, resultSlice)
 			// 恢复初始位置，为下一次交换做准备
 			stringSlice[startIndex], stringSlice[i] = stringSlice[i], stringSlice[startIndex]

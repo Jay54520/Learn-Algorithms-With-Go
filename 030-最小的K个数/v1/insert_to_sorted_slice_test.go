@@ -18,10 +18,10 @@ func TestInsertToSortedSlice(t *testing.T) {
 	})
 
 	t.Run("empty slice", func(t *testing.T) {
-		sortedSlice := make([]int, 0, 1)
-		number := 1
-		InsertToSortedSlice(&sortedSlice, number)
-		want := []int{1}
+		sortedSlice := make([]int, 0, 2)
+		InsertToSortedSlice(&sortedSlice, 1)
+		InsertToSortedSlice(&sortedSlice, 2)
+		want := []int{1, 2}
 
 		if !reflect.DeepEqual(sortedSlice, want) {
 			t.Errorf("got %v want %v", sortedSlice, want)

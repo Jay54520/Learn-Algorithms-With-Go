@@ -9,10 +9,17 @@ import "sort"
 // 否则，说明 number 是大于 sortedSLice 中的所有数，将 number 插入到最后
 func InsertToSortedSlice(sortedSLice *[]int, number int) {
 	sortedSliceValue := *sortedSLice
+	var index int
 
-	index := sort.Search(number, func(i int) bool {
-		return sortedSliceValue[i] >= number
-	})
+	if len(sortedSliceValue) == 0 {
+		sortedSliceValue = append(sortedSliceValue, number)
+		*sortedSLice = sortedSliceValue
+		return
+	} else {
+		index = sort.Search(number, func(i int) bool {
+			return sortedSliceValue[i] >= number
+		})
+	}
 
 	// 没有找到大于等于 number 的数
 	if index == -1 {

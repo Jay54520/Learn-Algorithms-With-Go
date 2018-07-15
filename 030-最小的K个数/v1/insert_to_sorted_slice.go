@@ -28,7 +28,9 @@ func InsertToSortedSlice(sortedSLice *[]int, number int) {
 		// ------------将 number 插入到 index 这个位置------------
 		// 参考 https://gist.github.com/zhum/57cb45d8bbea86d87490
 		// 扩大 cap，将 index 和之后的所有元素复制到 index + 1 之后，然后替换 index 的值
-		sortedSliceValue = append(sortedSliceValue, 0)
+		if len(sortedSliceValue) == cap(sortedSliceValue) {
+			sortedSliceValue = append(sortedSliceValue, 0)
+		}
 		copy(sortedSliceValue[index+1:], sortedSliceValue[index:])
 		sortedSliceValue[index] = number
 		// ------------将 number 插入到 index 这个位置------------

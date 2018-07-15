@@ -22,6 +22,16 @@ package main
 // 所以为 O(nlogk)。
 // 空间复杂度： O(k)，用于储存 k 个有序元素。
 // 相比算法 1 有优化。
-func GetLeastNumbers(numbers []int, k int)  {
-	
+func GetLeastNumbers(numbers []int, k int) []int {
+	sortedSlice := make([]int, 0, k+1)
+	var length int
+
+	for _, number := range numbers {
+		InsertToSortedSlice(&sortedSlice, number)
+		length = len(sortedSlice)
+		if length == k+1 {
+			sortedSlice = sortedSlice[:length-1]
+		}
+	}
+	return sortedSlice
 }

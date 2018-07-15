@@ -17,12 +17,16 @@ func InsertToSortedSlice(sortedSLice *[]int, number int) {
 		return
 	} else {
 		index = sort.Search(number, func(i int) bool {
-			return sortedSliceValue[i] >= number
+			if i < len(sortedSliceValue) && sortedSliceValue[i] >= number {
+				return true
+			} else {
+				return false
+			}
 		})
 	}
 
 	// 没有找到大于等于 number 的数
-	if index == -1 {
+	if index == number {
 		*sortedSLice = append(sortedSliceValue, number)
 	} else {
 		// ------------将 number 插入到 index 这个位置------------

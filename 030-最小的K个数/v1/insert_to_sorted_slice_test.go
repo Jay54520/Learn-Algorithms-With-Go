@@ -26,6 +26,16 @@ func TestInsertToSortedSlice(t *testing.T) {
 		if !reflect.DeepEqual(sortedSlice, want) {
 			t.Errorf("got %v want %v", sortedSlice, want)
 		}
+	})
 
+	t.Run("inserted maximum num", func(t *testing.T) {
+		sortedSlice := []int{1, 2, 4}
+		number := 100
+		InsertToSortedSlice(&sortedSlice, number)
+		want := []int{1, 2, 4, 100}
+
+		if !reflect.DeepEqual(sortedSlice, want) {
+			t.Errorf("got %v want %v", sortedSlice, want)
+		}
 	})
 }

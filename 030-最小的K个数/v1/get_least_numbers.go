@@ -18,10 +18,10 @@ package main
 // 遍历完成后，返回这个有序数组。
 //
 // 复杂度分析：
-// 时间复杂度：遍历数组为 O(n)、 维护容量为 k 的有序数组为 O(logk)（二分法查找位置然后插入）
-// 所以为 O(nlogk)。
+// 时间复杂度：遍历数组为 O(n)、 维护容量为 k 的有序数组为 O(k)（二分法查找位置然后插入）
+// 所以为 O(nk)。
 // 空间复杂度： O(k)，用于储存 k 个有序元素。
-// 相比算法 1 有优化。
+// 相比算法 1 空间复杂度有优化。
 func GetLeastNumbers(numbers []int, k int) []int {
 	sortedSlice := make([]int, 0, k+1)
 	var length int

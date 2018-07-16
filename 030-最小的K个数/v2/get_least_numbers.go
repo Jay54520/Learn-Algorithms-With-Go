@@ -14,6 +14,8 @@ import "container/heap"
 // 所以为 O(nlogk)。k 相比于 n 可以被忽略掉。
 // 空间复杂度： O(k)，用于储存 k 个元素的最大堆。
 // 相比算法 2 时间复杂度有优化。
+//
+// 由于这里插入为 O(logk)，所以使用二叉搜索树的时间复杂度也是一样的。
 func GetLeastNumbers(numbers []int, k int) (result []int) {
 	hValue := make(MaxIntHeap, 0, k + 1)
 	h := &hValue

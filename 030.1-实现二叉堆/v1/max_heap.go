@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 const rootIndex = 0
 
 // 使用数组实现最大堆，并含有 Push 和 Pop 方法
@@ -38,9 +40,19 @@ func (h *MaxIntHeap) shouldStopUp(index int) (shouldStopUp bool) {
 	if index == rootIndex {
 		shouldStopUp = true
 	}
-	parentIndex := (index - 1) / 2
+	parentIndex, _ := getParentIndex(index)
 	if (*h)[index] < (*h)[parentIndex] {
 		shouldStopUp = true
 	}
+	return
+}
+
+
+func getParentIndex(childIndex int) (parentIndex int, err error)  {
+	if childIndex == rootIndex {
+		err = errors.New("根节点没有父节点")
+		return
+	}
+	parentIndex = (childIndex - 1) / 2
 	return
 }

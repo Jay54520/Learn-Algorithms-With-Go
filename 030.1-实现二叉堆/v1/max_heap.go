@@ -47,12 +47,79 @@ func (h *MaxIntHeap) shouldStopUp(index int) (shouldStopUp bool) {
 	return
 }
 
-
-func (h *MaxIntHeap) getParentIndex(childIndex int) (parentIndex int, err error)  {
+func (h *MaxIntHeap) getParentIndex(childIndex int) (parentIndex int, err error) {
 	if childIndex == rootIndex {
 		err = errors.New("根节点没有父节点")
 		return
 	}
 	parentIndex = (childIndex - 1) / 2
+	return
+}
+
+// 设置弹出的结果为根节点的值，然后将根节点与最后一个节点交换，然后删除最后一个节点。设置根节点为指定节点。
+// 推导过程与上面的 Push 相同，只是由不能上移变成不能下移，由比较新增节点与父节点变为比较指定节点与最大子节点。
+// 将根节点与最后一个节点交换，可以简化代码的写法，这种方法叫什么？
+// 如果指定节点不满足关系，那么指定节点必须与最大子节点交换，这样交换后的子树（最大子节点 - 指定节点 - （可能的）另一个子节点）才能满足关系。
+//
+// 将弹出的结果设置为根节点的值，然后将根节点与最后一个节点交换，然后删除最后一个节点。将根节点指定为指定节点。
+// 循环代码为：查看指定节点是否满足终止条件，如果满足，则返回结果；否则将指定节点与其最大子节点交换
+// 终止条件：指定节点变成了叶子节点或者指定节点大于它的所有子节点
+func (h *MaxIntHeap) Pop() (result int, err error) {
+	if len(*h) == 0 {
+		err = errors.New("不能对空 MaxIntHeap 执行 Pop()")
+		return
+	}
+	var maxChildIndex int
+
+	result = (*h)[rootIndex]
+	endIndex := len(*h) - 1
+	(*h)[rootIndex], (*h)[endIndex] = (*h)[endIndex], (*h)[rootIndex]
+	*h = (*h)[:endIndex]
+
+	elementIndex := rootIndex
+	shouldStopDown := h.shouldStopDown(elementIndex)
+
+	for !shouldStopDown {
+		maxChildIndex, _ = h.getMaxChildIndex(elementIndex)
+		(*h)[maxChildIndex], (*h)[elementIndex] = (*h)[elementIndex], (*h)[maxChildIndex]
+		elementIndex = maxChildIndex
+		shouldStopDown = h.shouldStopDown(elementIndex)
+	}
+	return
+}
+
+func (h *MaxIntHeap) shouldStopDown(index int) bool {
+	maxChildIndex, err := h.getMaxChildIndex(index)
+
+	// 有错误，说明是叶子节点。能不能这样使用错误，如果有多种错误怎么处理？
+	if err != nil {
+		return true
+	}
+
+	if (*h)[index] > (*h)[maxChildIndex] {
+		// 大于最大子节点就说明大于所有子节点
+		return true
+	} else {
+		return false
+	}
+}
+func (h *MaxIntHeap) getMaxChildIndex(parentIndex int) (maxChildIndex int, err error) {
+	leftChildIndex := 2*parentIndex + 1
+	if leftChildIndex >= len(*h) {
+		err = errors.New("leaf node doesn't have children")
+		return
+	}
+	rightChildIndex := 2*parentIndex + 2
+	if rightChildIndex < len(*h) {
+		// 同时拥有左右节点
+		if (*h)[leftChildIndex] > (*h)[rightChildIndex] {
+			maxChildIndex = leftChildIndex
+		} else {
+			maxChildIndex = rightChildIndex
+		}
+	} else {
+		// 只拥有左节点
+		maxChildIndex = leftChildIndex
+	}
 	return
 }

@@ -40,7 +40,7 @@ func (h *MaxIntHeap) shouldStopUp(index int) (shouldStopUp bool) {
 	if index == rootIndex {
 		shouldStopUp = true
 	}
-	parentIndex, _ := getParentIndex(index)
+	parentIndex, _ := h.getParentIndex(index)
 	if (*h)[index] < (*h)[parentIndex] {
 		shouldStopUp = true
 	}
@@ -48,7 +48,7 @@ func (h *MaxIntHeap) shouldStopUp(index int) (shouldStopUp bool) {
 }
 
 
-func getParentIndex(childIndex int) (parentIndex int, err error)  {
+func (h *MaxIntHeap) getParentIndex(childIndex int) (parentIndex int, err error)  {
 	if childIndex == rootIndex {
 		err = errors.New("根节点没有父节点")
 		return

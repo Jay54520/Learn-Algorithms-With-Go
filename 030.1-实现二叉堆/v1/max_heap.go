@@ -72,24 +72,30 @@ func (h *MaxIntHeap) Pop() (result int, err error) {
 		err = errors.New("不能对空 MaxIntHeap 执行 Pop()")
 		return
 	}
-	var maxChildIndex int
 
 	result = (*h)[rootIndex]
 	endIndex := len(*h) - 1
 	(*h)[rootIndex], (*h)[endIndex] = (*h)[endIndex], (*h)[rootIndex]
 	*h = (*h)[:endIndex]
 
-	elementIndex := rootIndex
-	shouldStopDown := h.shouldStopDown(elementIndex)
-
-	for !shouldStopDown {
-		maxChildIndex, _ = h.getMaxChildIndex(elementIndex)
-		(*h)[maxChildIndex], (*h)[elementIndex] = (*h)[elementIndex], (*h)[maxChildIndex]
-		elementIndex = maxChildIndex
-		shouldStopDown = h.shouldStopDown(elementIndex)
-	}
+	h.down(rootIndex)
 	return
 }
+
+// 将 index 下沉到合适的位置使二叉堆保持有效。index 下方的二叉堆都是有效的。
+func (h *MaxIntHeap) down(index int) {
+	shouldStopDown := h.shouldStopDown(index)
+	var maxChildIndex int
+
+	for !shouldStopDown {
+		maxChildIndex, _ = h.getMaxChildIndex(index)
+		(*h)[maxChildIndex], (*h)[index] = (*h)[index], (*h)[maxChildIndex]
+		index = maxChildIndex
+		shouldStopDown = h.shouldStopDown(index)
+	}
+
+}
+
 
 func (h *MaxIntHeap) shouldStopDown(index int) bool {
 	maxChildIndex, err := h.getMaxChildIndex(index)
@@ -125,4 +131,42 @@ func (h *MaxIntHeap) getMaxChildIndex(parentIndex int) (maxChildIndex int, err e
 		maxChildIndex = leftChildIndex
 	}
 	return
+}
+
+// 从高度为 0 开始到根节点，每次构建一层的二叉堆。
+// 高度为0的层只有一个节点，那么都是有效的二叉堆。然后构建高度为1的二叉堆，因为高度为0的二叉堆是有效的二叉堆，
+// 那么只需要使高度为 1 的节点和高度为 0 的二叉堆符合关系。
+// 终止条件：根节点为有效的二叉堆
+//高度为 h 的节点的索引范围是 [n / 2^(h+1), n / 2^h) （h >= 0），当 n / 2^(h+1) == rootIndex 时，
+//说明到了根节点，完成这个后整棵树就是有效的二叉堆了，因为与 rootIndex 同高度的只有它本身，所以不要考虑区间。
+// 当前的索引范围等于上一个索引范围除以 2。
+//
+// 时间复杂度：每个高度的所有节点都需要交换：(2^h-1 + 2^h-2 + ... + 2^0) = 2^h = n
+// 所以为 O(n)
+// 而对于 n 个节点，每次插入需要 n * O(logn) = O(nlogn)。因为上面是整棵树移动，而这里是单个节点移动。
+// 利用了树递归相似
+func (h *MaxIntHeap) Build() {
+	length := len(*h)
+
+	if length == 0 {
+		return
+	}
+
+	startIndex := length / 2
+	endIndex := length
+
+	for {
+		// 对于 [startIndex, endIndex)，要使以它们为根节点的二叉堆有效。由于它已经它的下方
+		//已经是有效的二叉堆，所以只需要将它沉到合适的位置即可
+		for index := startIndex; index < endIndex; index++ {
+			h.down(index)
+		}
+
+		if startIndex == rootIndex {
+			return
+		}
+
+		startIndex /= 2
+		endIndex /= 2
+	}
 }
